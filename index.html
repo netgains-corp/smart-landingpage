@@ -184,23 +184,31 @@
         .btn-cta:hover { transform: scale(1.02); box-shadow: 0 15px 40px rgba(16, 185, 129, 0.5); }
         .btn-subtext { display: block; font-size: 0.85rem; font-weight: 600; opacity: 0.9; text-transform: none; margin-top: 5px; font-family: 'Inter', sans-serif; letter-spacing: 0.5px; }
 
-        .no-thanks-link {
+        /* --- DECLINE BUTTON (NEW) --- */
+        .btn-decline {
             display: block;
-            margin-top: 25px;
+            margin: 20px auto 0 auto;
+            padding: 15px 20px;
+            background: transparent;
+            border: 2px solid var(--danger-red);
             color: var(--danger-red);
-            text-decoration: underline;
-            font-size: 1.15rem; /* Größere Schrift */
-            font-weight: 700; /* Fett */
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 700;
             cursor: pointer;
+            text-decoration: none;
             transition: all 0.3s;
+            width: 100%;
+            max-width: 650px;
             text-align: center;
-            opacity: 0.85;
-            padding: 10px;
+            opacity: 0.8;
         }
-        .no-thanks-link:hover {
+        .btn-decline:hover {
             opacity: 1;
-            transform: scale(1.02);
-            text-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
+            background: var(--danger-red);
+            color: white;
+            box-shadow: 0 5px 20px rgba(255, 0, 0, 0.4);
+            transform: translateY(-2px);
         }
 
         /* --- HERO SECTION --- */
@@ -503,8 +511,8 @@
                 <span class="btn-subtext">Einmaliges Angebot • Nur auf dieser Seite verfügbar</span>
             </a>
             
-            <!-- ABLEHNUNGSLINK HERO -->
-            <a href="https://buy.stripe.com/eVq28q2L80l03Rq7kOdnW01" class="no-thanks-link">Nein danke, ich möchte dieses Upgrade ablehnen und nur die Website für 899 € erwerben.</a>
+            <!-- ABLEHNUNGSLINK HERO (JETZT BUTTON) -->
+            <a href="https://buy.stripe.com/eVq28q2L80l03Rq7kOdnW01" class="btn-decline">Nein danke, ich möchte dieses Upgrade ablehnen und nur die Website für 899 € erwerben.</a>
             
             <p class="hero-scarcity">
                 <i class="fas fa-hourglass-half"></i> ACHTUNG: Dieses Angebot verfällt, sobald Sie diese Seite verlassen.
@@ -716,8 +724,8 @@
                         JA, ICH WILL DAS UPGRADE
                         <span class="btn-subtext">Zur Bestellung hinzufügen & SEO automatisieren</span>
                     </a>
-                    <!-- ABLEHNUNGSLINK VALUE STACK -->
-                    <a href="https://buy.stripe.com/eVq28q2L80l03Rq7kOdnW01" class="no-thanks-link">Nein danke, ich möchte dieses Upgrade ablehnen und nur die Website für 899 € erwerben.</a>
+                    <!-- ABLEHNUNGSLINK VALUE STACK (JETZT BUTTON) -->
+                    <a href="https://buy.stripe.com/eVq28q2L80l03Rq7kOdnW01" class="btn-decline">Nein danke, ich möchte dieses Upgrade ablehnen und nur die Website für 899 € erwerben.</a>
                 </div>
             </div>
         </div>
