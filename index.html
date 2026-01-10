@@ -66,6 +66,76 @@
             max-width: 1250px;
         }
 
+        /* --- FUNNEL PROGRESS BAR (NEW) --- */
+        .funnel-progress {
+            background: rgba(2, 6, 23, 0.95);
+            border-bottom: 1px solid var(--glass-border);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        .steps-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .step {
+            display: flex;
+            align-items: center;
+            opacity: 0.5;
+            transition: all 0.3s;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+        .step-icon {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            border: 2px solid var(--text-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-weight: 800;
+            font-size: 0.8rem;
+        }
+        
+        /* Active Step Styles */
+        .step.active {
+            opacity: 1;
+            color: var(--accent-cyan);
+            transform: scale(1.05);
+        }
+        .step.active .step-icon {
+            border-color: var(--accent-cyan);
+            background: rgba(16, 185, 129, 0.1);
+            box-shadow: 0 0 15px rgba(16, 185, 129, 0.4);
+        }
+
+        /* Completed Step Styles */
+        .step.completed {
+            opacity: 0.8;
+            color: var(--accent-pink);
+        }
+        .step.completed .step-icon {
+            border-color: var(--accent-pink);
+            background: var(--accent-pink);
+            color: #000;
+        }
+        
+        @media (max-width: 768px) {
+            .step-text { display: none; }
+            .step.active .step-text { display: block; font-size: 0.8rem; }
+            .steps-container { justify-content: center; gap: 20px; }
+            .funnel-progress { padding: 10px 0; }
+        }
+
         /* --- BACKGROUND ANIMATION BLOBS (GREEN THEME) --- */
         .blob-container {
             position: fixed;
@@ -114,7 +184,7 @@
         .btn-subtext { display: block; font-size: 0.85rem; font-weight: 600; opacity: 0.9; text-transform: none; margin-top: 5px; font-family: 'Inter', sans-serif; letter-spacing: 0.5px; }
 
         /* --- HERO SECTION --- */
-        .hero { padding: 20px 0 80px 0; text-align: center; position: relative; }
+        .hero { padding: 40px 0 80px 0; text-align: center; position: relative; }
         .pre-headline { background: rgba(16, 185, 129, 0.1); color: var(--accent-cyan); padding: 8px 16px; border-radius: 20px; font-weight: 700; font-size: 0.9rem; letter-spacing: 1px; margin-bottom: 20px; display: inline-block; border: 1px solid rgba(16, 185, 129, 0.3); backdrop-filter: blur(10px); }
         .hero h1 { 
             font-size: 5.5rem; 
@@ -130,6 +200,8 @@
             font-weight: 900;
             text-shadow: 0 0 20px rgba(255, 0, 0, 0.4);
         }
+
+        .red-underline { text-decoration: underline; text-decoration-color: var(--danger-red); text-decoration-thickness: 5px; text-underline-offset: 8px; }
 
         .hero-sub { font-size: 1.25rem; color: var(--text-secondary); margin-bottom: 25px; max-width: 800px; margin-left: auto; margin-right: auto; font-weight: 300; }
         
@@ -195,7 +267,7 @@
             100% { left: 150%; }
         }
 
-        /* --- NEW: SEO REVOLUTION SECTION --- */
+        /* --- SEO REVOLUTION SECTION --- */
         .seo-revolution {
             padding: 120px 0;
             background: rgba(2, 6, 23, 0.8);
@@ -254,19 +326,80 @@
         .status-item h3 i { color: var(--accent-pink); margin-right: 15px; font-size: 1.8rem; }
 
         .stack-box { margin-top: 200px; padding: 220px 60px 60px 60px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.15); position: relative; }
-        .stack-visual-wrapper { position: absolute; top: -180px; left: 50%; transform: translateX(-50%); width: 100%; max-width: 800px; height: 400px; z-index: 10; pointer-events: none; }
-        .stack-laptop { position: absolute; left: 50%; top: 40px; transform: translateX(-50%); width: 420px; z-index: 2; }
-        .stack-phone { position: absolute; left: 68%; top: 140px; width: 100px; z-index: 3; transform: rotate(-5deg); }
-        .phone-mockup { background-color: #111; border-radius: 18px; padding: 8px 4px; box-shadow: 0 15px 30px rgba(0,0,0,0.5); border: 2px solid #333; }
-        .phone-screen { width: 100%; padding-top: 216%; position: relative; background: #000; border-radius: 12px; overflow: hidden; }
-        .phone-screen img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; }
+        
+        /* UPDATED VISUAL WRAPPER FOR CENTERING */
+        .stack-visual-wrapper { 
+            position: absolute; 
+            top: -180px; 
+            left: 50%; 
+            transform: translateX(-50%); 
+            width: 100%; 
+            max-width: 100%;
+            height: 400px; 
+            z-index: 10; 
+            pointer-events: none; 
+            display: block; 
+        }
+        
+        .stack-laptop { 
+            position: relative;
+            width: 550px;
+            z-index: 2;
+            margin: 40px auto 0 auto; /* Auto margin for perfect centering */
+        }
+        
+        .laptop-mockup { background-color: #1a1a1a; border-radius: 12px 12px 0 0; padding: 12px 12px 0 12px; position: relative; box-shadow: 0 20px 50px rgba(0,0,0,0.6); border: 1px solid #333; }
+        .laptop-screen { width: 100%; padding-top: 62.5%; position: relative; overflow: hidden; background: #000; }
+        
+        /* --- CSS BASED "ALWAYS LOADING" ANIMATION --- */
+        .data-stream {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: #000;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            font-family: 'Courier New', monospace;
+            overflow: hidden;
+        }
+        .data-row {
+            width: 90%; height: 2px; background: rgba(16, 185, 129, 0.2);
+            margin: 4px 0; position: relative;
+        }
+        .data-row::after {
+            content: ""; position: absolute; top: 0; left: 0; height: 100%; width: 20%;
+            background: var(--accent-cyan);
+            animation: dataScan 2s infinite linear;
+            box-shadow: 0 0 10px var(--accent-cyan);
+        }
+        .data-row:nth-child(2)::after { animation-delay: 0.2s; width: 40%; }
+        .data-row:nth-child(3)::after { animation-delay: 0.5s; width: 10%; }
+        .data-row:nth-child(4)::after { animation-delay: 0.1s; width: 60%; }
+        .data-row:nth-child(5)::after { animation-delay: 0.7s; width: 30%; }
+        
+        .scan-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(180deg, transparent 0%, rgba(16, 185, 129, 0.1) 50%, transparent 100%);
+            animation: radarScan 3s infinite linear;
+            border-bottom: 2px solid rgba(16, 185, 129, 0.5);
+        }
+        .scan-text {
+            position: absolute; bottom: 20px; left: 20px;
+            color: var(--accent-cyan); font-size: 12px; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 2px;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes dataScan { 0% { left: -20%; opacity: 0; } 50% { opacity: 1; } 100% { left: 100%; opacity: 0; } }
+        @keyframes radarScan { 0% { top: -100%; } 100% { top: 100%; } }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+
+        .laptop-base { height: 16px; background: linear-gradient(to bottom, #2a2a2a, #1a1a1a); border-radius: 0 0 16px 16px; position: relative; margin-top: -1px; border-top: 1px solid #000; box-shadow: 0 15px 40px rgba(0,0,0,0.6); }
 
         .floating-icon { position: absolute; background: rgba(255, 255, 255, 0.08); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 20px; display: flex; align-items: center; justify-content: center; color: white; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3); animation: floatIcon 6s ease-in-out infinite; z-index: 1; }
         @keyframes floatIcon { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-15px) rotate(2deg); } }
-        .icon-1 { width: 100px; height: 100px; top: 20px; left: 10%; font-size: 40px; color: var(--accent-cyan); animation-delay: 0s; }
-        .icon-2 { width: 90px; height: 90px; top: 0px; right: 15%; font-size: 36px; color: var(--accent-pink); animation-delay: 1.5s; }
-        .icon-3 { width: 80px; height: 80px; top: 180px; left: 2%; font-size: 32px; color: #fff; animation-delay: 2.5s; }
-        .icon-4 { width: 70px; height: 70px; top: 200px; right: 5%; font-size: 28px; color: #fbbf24; animation-delay: 3.5s; }
+        /* Adjusted Icon Positions for Centered Layout */
+        .icon-1 { width: 100px; height: 100px; top: 20px; left: 50%; margin-left: -400px; font-size: 40px; color: var(--accent-cyan); animation-delay: 0s; }
+        .icon-2 { width: 90px; height: 90px; top: 0px; left: 50%; margin-left: 300px; font-size: 36px; color: var(--accent-pink); animation-delay: 1.5s; }
+        .icon-3 { width: 80px; height: 80px; top: 180px; left: 50%; margin-left: -450px; font-size: 32px; color: #fff; animation-delay: 2.5s; }
+        .icon-4 { width: 70px; height: 70px; top: 200px; left: 50%; margin-left: 350px; font-size: 28px; color: #fbbf24; animation-delay: 3.5s; }
 
         .stack-item { display: flex; justify-content: space-between; align-items: center; padding: 25px 0; border-bottom: 1px solid var(--glass-border); transition: all 0.3s; }
         .stack-name { font-size: 1.4rem; font-weight: 700; color: var(--text-primary); }
@@ -299,6 +432,26 @@
 </head>
 <body>
 
+    <!-- FUNNEL PROGRESS BAR -->
+    <div class="funnel-progress">
+        <div class="container">
+            <div class="steps-container">
+                <div class="step completed">
+                    <div class="step-icon"><i class="fas fa-check"></i></div>
+                    <span class="step-text">1: Unser Website Angebot</span>
+                </div>
+                <div class="step active">
+                    <div class="step-icon">2</div>
+                    <span class="step-text">2: Exklusives SEO Angebot</span>
+                </div>
+                <div class="step">
+                    <div class="step-icon">3</div>
+                    <span class="step-text">3: Vertragsabschluss & Bezahlung</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- ANIMATED BACKGROUND BLOBS -->
     <div class="blob-container">
         <div class="blob blob-1"></div>
@@ -311,7 +464,7 @@
         <div class="container">
             <div class="pre-headline">Exklusives Upgrade Angebot</div>
             
-            <h1>Unternehmen zahlen <span class="red-highlight">Millionen</span> dafür was diese Unternehmer entwickelt haben</h1>
+            <h1>Unternehmen zahlen <span class="red-highlight">Millionen</span> dafür was diese <span class="red-underline">Unternehmer entwickelt haben</span></h1>
             
             <p class="hero-sub">Sie haben den ersten Schritt gemacht. Nutzen Sie jetzt den unfairen Vorteil, den sich sonst nur Großkonzerne leisten können.</p>
 
@@ -477,18 +630,22 @@
                 <div class="stack-laptop">
                     <div class="laptop-mockup">
                         <div class="laptop-screen">
-                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="[Analytics Dashboard]">
+                            <!-- CSS BASED ANIMATION "ALWAYS LOADING" -->
+                            <div class="data-stream">
+                                <div class="data-row"></div>
+                                <div class="data-row"></div>
+                                <div class="data-row"></div>
+                                <div class="data-row"></div>
+                                <div class="data-row"></div>
+                                <div class="data-row"></div>
+                                <div class="data-row"></div>
+                                <div class="data-row"></div>
+                                <div class="scan-overlay"></div>
+                                <div class="scan-text">SYSTEM SCANNING...</div>
+                            </div>
                         </div>
                     </div>
                     <div class="laptop-base"></div>
-                </div>
-
-                <div class="stack-phone">
-                    <div class="phone-mockup">
-                        <div class="phone-screen">
-                            <img src="https://images.unsplash.com/photo-1555421689-491a97ff2040?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" alt="[Mobile SEO Stats]">
-                        </div>
-                    </div>
                 </div>
             </div>
 
@@ -537,6 +694,39 @@
                         <span class="btn-subtext">Zur Bestellung hinzufügen & SEO automatisieren</span>
                     </a>
                     <a href="#" style="display: block; margin-top: 20px; color: var(--text-secondary); text-decoration: underline; font-size: 0.9rem;">Nein danke, ich verzichte auf automatische Neukunden durch Google.</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW: TRANSPARENCY SECTION -->
+    <section class="transparency-section" style="padding: 100px 0; background: linear-gradient(180deg, var(--bg-dark) 0%, rgba(255,255,255,0.02) 50%, var(--bg-dark) 100%); border-top: 1px solid var(--glass-border); position: relative; overflow: hidden;">
+        <!-- Pulsing Background Effect -->
+        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 800px; height: 800px; background: rgba(255, 0, 0, 0.05); filter: blur(100px); border-radius: 50%; animation: pulseRed 3s infinite;"></div>
+        
+        <style>@keyframes pulseRed { 0% { opacity: 0.5; transform: translate(-50%, -50%) scale(0.9); } 50% { opacity: 0.8; transform: translate(-50%, -50%) scale(1.1); } 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(0.9); } }</style>
+
+        <div class="container" style="position: relative; z-index: 2;">
+            <div class="glass-panel" style="max-width: 900px; margin: 0 auto; border: 1px solid rgba(255, 255, 255, 0.1); background: rgba(10, 10, 10, 0.8);">
+                <div style="text-align: center; margin-bottom: 30px;">
+                    <div style="display: inline-block; padding: 10px 20px; background: rgba(255, 0, 0, 0.1); border: 1px solid var(--danger-red); color: var(--danger-red); border-radius: 50px; font-weight: 700; margin-bottom: 20px; text-transform: uppercase; font-size: 0.9rem; box-shadow: 0 0 15px rgba(255,0,0,0.2);">
+                        <i class="fas fa-heart"></i> Ehrlichkeit zuerst
+                    </div>
+                    <h2 style="font-size: 3rem; margin-bottom: 20px;">Warum sind wir so günstig?</h2>
+                </div>
+                
+                <div style="font-size: 1.2rem; line-height: 1.8; color: var(--text-secondary); text-align: center;">
+                    <p style="margin-bottom: 20px;">
+                        Weil wir gerade am Anfang mit dem Unternehmen stehen und aus Erfahrung mit vielen erfolgreichen Firmen wissen, wie wichtig ein exzellenter Ruf ist. 
+                        <strong style="color: var(--text-primary); border-bottom: 2px solid var(--accent-cyan);">Mit diesem Angebotspreis wollen wir uns erstmal einen Namen machen.</strong>
+                    </p>
+                    
+                    <div style="margin-top: 40px; background: rgba(255, 255, 255, 0.03); border-left: 4px solid var(--accent-cyan); padding: 30px; border-radius: 0 15px 15px 0; text-align: left;">
+                        <p style="margin-bottom: 10px; font-weight: 700; color: var(--accent-cyan); text-transform: uppercase; letter-spacing: 1px;"><i class="fas fa-comment-dots"></i> Offenes Wort zur eigenen Website:</p>
+                        <p style="font-style: italic; color: var(--text-primary); font-family: 'Georgia', serif;">
+                            "Falls Sie sich wundern: Bisher haben wir uns bewusst gegen eine eigene Website entschieden, damit Kunden nicht denken 'Aha, so wird dann meine Website aussehen'. Wir entwickeln für jeden Kunden ein Unikat, das dessen Identität widerspiegelt, nicht unsere."
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
