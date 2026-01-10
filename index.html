@@ -184,6 +184,25 @@
         .btn-cta:hover { transform: scale(1.02); box-shadow: 0 15px 40px rgba(16, 185, 129, 0.5); }
         .btn-subtext { display: block; font-size: 0.85rem; font-weight: 600; opacity: 0.9; text-transform: none; margin-top: 5px; font-family: 'Inter', sans-serif; letter-spacing: 0.5px; }
 
+        .no-thanks-link {
+            display: block;
+            margin-top: 25px;
+            color: var(--danger-red);
+            text-decoration: underline;
+            font-size: 1.15rem; /* Größere Schrift */
+            font-weight: 700; /* Fett */
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+            opacity: 0.85;
+            padding: 10px;
+        }
+        .no-thanks-link:hover {
+            opacity: 1;
+            transform: scale(1.02);
+            text-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
+        }
+
         /* --- HERO SECTION --- */
         .hero { padding: 40px 0 80px 0; text-align: center; position: relative; }
         .pre-headline { background: rgba(16, 185, 129, 0.1); color: var(--accent-cyan); padding: 8px 16px; border-radius: 20px; font-weight: 700; font-size: 0.9rem; letter-spacing: 1px; margin-bottom: 20px; display: inline-block; border: 1px solid rgba(16, 185, 129, 0.3); backdrop-filter: blur(10px); }
@@ -479,10 +498,13 @@
             </div>
 
             <!-- HERO CTA -->
-            <a href="https://netgains-pactum.pages.dev/" class="btn-cta">
+            <a href="https://buy.stripe.com/cNieVcdpM1p4cnW0WqdnW02" class="btn-cta">
                 UPGRADE JETZT HINZUFÜGEN
                 <span class="btn-subtext">Einmaliges Angebot • Nur auf dieser Seite verfügbar</span>
             </a>
+            
+            <!-- ABLEHNUNGSLINK HERO -->
+            <a href="https://buy.stripe.com/eVq28q2L80l03Rq7kOdnW01" class="no-thanks-link">Nein danke, ich möchte dieses Upgrade ablehnen und nur die Website für 899 € erwerben.</a>
             
             <p class="hero-scarcity">
                 <i class="fas fa-hourglass-half"></i> ACHTUNG: Dieses Angebot verfällt, sobald Sie diese Seite verlassen.
@@ -690,11 +712,12 @@
                 </div>
 
                 <div class="text-center">
-                    <a href="https://netgains-pactum.pages.dev/" class="btn-cta">
+                    <a href="https://buy.stripe.com/cNieVcdpM1p4cnW0WqdnW02" class="btn-cta">
                         JA, ICH WILL DAS UPGRADE
                         <span class="btn-subtext">Zur Bestellung hinzufügen & SEO automatisieren</span>
                     </a>
-                    <a href="#" style="display: block; margin-top: 20px; color: var(--text-secondary); text-decoration: underline; font-size: 0.9rem;">Nein danke, ich verzichte auf automatische Neukunden durch Google.</a>
+                    <!-- ABLEHNUNGSLINK VALUE STACK -->
+                    <a href="https://buy.stripe.com/eVq28q2L80l03Rq7kOdnW01" class="no-thanks-link">Nein danke, ich möchte dieses Upgrade ablehnen und nur die Website für 899 € erwerben.</a>
                 </div>
             </div>
         </div>
