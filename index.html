@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NetGains | Exclusive Upsell</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* --- NETGAINS GREEN OPS DESIGN SYSTEM --- */
+        :root {
+            --bg-dark: #020617;
+            
+            /* GRÜNES THEMA */
+            --accent-indigo: #064e3b; /* Dark Emerald */
+            --accent-cyan: #10b981;   /* Primary Bright Emerald */
+            --accent-pink: #84cc16;   /* Lime Green */
+            
+            --text-primary: #ffffff;
+            --text-secondary: #cbd5e1;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(16, 185, 129, 0.2); 
+            --glass-blur: 50px;
+            --danger-red: #ff0000; /* KNALLROT */
+            --price-green: #00E676;
+            --status-gold: #fbbf24;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: var(--bg-dark);
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
+            line-height: 1.2;
+            letter-spacing: 0.5px;
+            color: var(--text-primary);
+        }
+
+        .text-center { text-align: center; }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .hero .container {
+            max-width: 1250px;
+        }
+
+        /* --- BACKGROUND ANIMATION BLOBS (GREEN THEME) --- */
+        .blob-container {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            overflow: hidden; z-index: -1; pointer-events: none;
+        }
+        .blob {
+            position: absolute; filter: blur(80px); opacity: 0.4;
+            animation: move-gradient 20s infinite alternate ease-in-out;
+            border-radius: 50%;
+        }
+        .blob-1 { top: -10%; left: -10%; width: 50vw; height: 50vw; background: var(--accent-indigo); }
+        .blob-2 { bottom: -10%; right: -10%; width: 60vw; height: 60vw; background: var(--accent-cyan); animation-delay: -5s; }
+        .blob-3 { top: 40%; left: 40%; width: 40vw; height: 40vw; background: var(--accent-pink); opacity: 0.2; animation-delay: -10s; }
+
+        @keyframes move-gradient {
+            0% { transform: translate(0, 0) rotate(0deg) scale(1); }
+            100% { transform: translate(20px, 20px) rotate(5deg) scale(1.05); }
+        }
+
+        /* --- GLASS PANEL --- */
+        .glass-panel {
+            position: relative;
+            background: var(--glass-bg);
+            backdrop-filter: blur(var(--glass-blur)) saturate(150%) brightness(110%);
+            -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(150%) brightness(110%);
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            border-radius: 24px;
+            padding: 40px;
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            overflow: visible;
+        }
+        .glass-panel:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-cyan);
+            box-shadow: 0 30px 60px -10px rgba(0, 0, 0, 0.7), 0 0 20px rgba(16, 185, 129, 0.2);
+        }
+
+        /* --- BUTTONS --- */
+        .btn-cta {
+            background: linear-gradient(135deg, #059669 0%, #84cc16 100%);
+            color: white; padding: 22px 45px; font-size: 1.4rem; font-weight: 800; border: none; border-radius: 50px; cursor: pointer; text-decoration: none; display: block; margin: 25px auto 0 auto; box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3); transition: all 0.3s ease; width: 100%; max-width: 650px; text-align: center; font-family: 'Oswald', sans-serif; text-transform: uppercase; position: relative; overflow: hidden; z-index: 2;
+        }
+        .btn-cta:hover { transform: scale(1.02); box-shadow: 0 15px 40px rgba(16, 185, 129, 0.5); }
+        .btn-subtext { display: block; font-size: 0.85rem; font-weight: 600; opacity: 0.9; text-transform: none; margin-top: 5px; font-family: 'Inter', sans-serif; letter-spacing: 0.5px; }
+
+        /* --- HERO SECTION --- */
+        .hero { padding: 20px 0 80px 0; text-align: center; position: relative; }
+        .pre-headline { background: rgba(16, 185, 129, 0.1); color: var(--accent-cyan); padding: 8px 16px; border-radius: 20px; font-weight: 700; font-size: 0.9rem; letter-spacing: 1px; margin-bottom: 20px; display: inline-block; border: 1px solid rgba(16, 185, 129, 0.3); backdrop-filter: blur(10px); }
+        .hero h1 { 
+            font-size: 5.5rem; 
+            margin-bottom: 30px; 
+            color: white; 
+            text-shadow: 0 10px 30px rgba(0,0,0,0.5); 
+            line-height: 1.1;
+            font-weight: 700;
+        }
+        
+        .red-highlight {
+            color: var(--danger-red);
+            font-weight: 900;
+            text-shadow: 0 0 20px rgba(255, 0, 0, 0.4);
+        }
+
+        .hero-sub { font-size: 1.25rem; color: var(--text-secondary); margin-bottom: 25px; max-width: 800px; margin-left: auto; margin-right: auto; font-weight: 300; }
+        
+        .video-wrapper { max-width: 850px; margin: 0 auto 30px auto; border-radius: 20px; border: 1px solid var(--glass-border); background: rgba(0,0,0,0.5); box-shadow: 0 25px 50px -12px rgba(0,0,0,0.8); aspect-ratio: 16 / 9; display: flex; align-items: center; justify-content: center; position: relative; backdrop-filter: blur(10px); }
+        .play-btn { width: 80px; height: 80px; background: rgba(16, 185, 129, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 2px solid var(--accent-cyan); transition: all 0.3s; cursor: pointer; box-shadow: 0 0 30px rgba(16, 185, 129, 0.2); }
+        .play-btn:hover { background: var(--accent-cyan); transform: scale(1.1); border-color: var(--accent-cyan); }
+        .play-btn i { color: white; margin-left: 5px; }
+        .play-btn:hover i { color: #000; }
+        
+        .hero-scarcity { color: var(--accent-cyan); font-weight: 700; margin-top: 20px; font-size: 1.1rem; text-shadow: 0 0 20px rgba(16, 185, 129, 0.4); animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { opacity: 0.7; } 50% { opacity: 1; text-shadow: 0 0 30px rgba(16, 185, 129, 0.8); } 100% { opacity: 0.7; } }
+
+        /* --- LOGO SECTION --- */
+        .logo-section {
+            padding: 100px 0;
+            border-bottom: 1px solid var(--glass-border);
+            background: linear-gradient(180deg, rgba(255,255,255,0.01) 0%, rgba(255,255,255,0.02) 50%, rgba(255,255,255,0.01) 100%);
+        }
+        .logo-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            align-items: center;
+            justify-items: center;
+        }
+        @media (min-width: 600px) { .logo-grid { grid-template-columns: repeat(4, 1fr); } }
+        @media (min-width: 1024px) { .logo-grid { grid-template-columns: repeat(6, 1fr); gap: 40px; } }
+
+        .logo-item {
+            width: 100%; height: 60px;
+            display: flex; justify-content: center; align-items: center;
+            cursor: pointer; padding: 5px;
+        }
+
+        .logo-mask {
+            width: 100%; height: 100%; min-height: 40px;
+            background-color: #ffffff; 
+            -webkit-mask-image: var(--logo-url);
+            mask-image: var(--logo-url);
+            -webkit-mask-size: contain; mask-size: contain;
+            -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
+            -webkit-mask-position: center; mask-position: center;
+            position: relative; transition: all 0.3s ease; overflow: hidden;
+        }
+
+        .logo-item:hover .logo-mask {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+        }
+
+        .logo-mask::after {
+            content: ""; position: absolute; top: 0; left: -150%; width: 200%; height: 100%;
+            background: linear-gradient(110deg, transparent 25%, rgba(16, 185, 129, 0.9) 45%, rgba(132, 204, 22, 0.9) 55%, transparent 75%);
+            transform: skewX(-20deg);
+            animation: shineSwipe 4s infinite linear;
+            animation-delay: var(--delay);
+            mix-blend-mode: normal;
+        }
+
+        @keyframes shineSwipe {
+            0% { left: -150%; }
+            40% { left: 150%; }
+            100% { left: 150%; }
+        }
+
+        /* --- NEW: SEO REVOLUTION SECTION --- */
+        .seo-revolution {
+            padding: 120px 0;
+            background: rgba(2, 6, 23, 0.8);
+            border-bottom: 1px solid var(--glass-border);
+        }
+        
+        .chatgpt-box {
+            background: #1e1e1e;
+            border: 2px solid var(--danger-red);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 40px auto;
+            max-width: 800px;
+            text-align: center;
+            box-shadow: 0 0 50px rgba(255, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .chatgpt-box::before {
+            content: "";
+            position: absolute; top: 0; left: 0; width: 100%; height: 5px;
+            background: var(--danger-red);
+        }
+
+        .seo-feature-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        @media (max-width: 800px) {
+            .seo-feature-grid { grid-template-columns: 1fr; }
+        }
+
+        .seo-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+        }
+        
+        .machine-card {
+            border-color: var(--accent-cyan);
+            background: rgba(16, 185, 129, 0.1);
+        }
+
+        /* --- SECTIONS --- */
+        .status-section, .stack-section { padding: 120px 0; position: relative; }
+        
+        .status-section { border-bottom: 1px solid var(--glass-border); }
+        .status-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; margin-top: 50px; }
+        .status-item { text-align: left; height: 100%; }
+        .status-item h3 { color: var(--text-primary); margin-bottom: 15px; display: flex; align-items: center; font-size: 1.8rem; }
+        .status-item h3 i { color: var(--accent-pink); margin-right: 15px; font-size: 1.8rem; }
+
+        .stack-box { margin-top: 200px; padding: 220px 60px 60px 60px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.15); position: relative; }
+        .stack-visual-wrapper { position: absolute; top: -180px; left: 50%; transform: translateX(-50%); width: 100%; max-width: 800px; height: 400px; z-index: 10; pointer-events: none; }
+        .stack-laptop { position: absolute; left: 50%; top: 40px; transform: translateX(-50%); width: 420px; z-index: 2; }
+        .stack-phone { position: absolute; left: 68%; top: 140px; width: 100px; z-index: 3; transform: rotate(-5deg); }
+        .phone-mockup { background-color: #111; border-radius: 18px; padding: 8px 4px; box-shadow: 0 15px 30px rgba(0,0,0,0.5); border: 2px solid #333; }
+        .phone-screen { width: 100%; padding-top: 216%; position: relative; background: #000; border-radius: 12px; overflow: hidden; }
+        .phone-screen img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; }
+
+        .floating-icon { position: absolute; background: rgba(255, 255, 255, 0.08); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 20px; display: flex; align-items: center; justify-content: center; color: white; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3); animation: floatIcon 6s ease-in-out infinite; z-index: 1; }
+        @keyframes floatIcon { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-15px) rotate(2deg); } }
+        .icon-1 { width: 100px; height: 100px; top: 20px; left: 10%; font-size: 40px; color: var(--accent-cyan); animation-delay: 0s; }
+        .icon-2 { width: 90px; height: 90px; top: 0px; right: 15%; font-size: 36px; color: var(--accent-pink); animation-delay: 1.5s; }
+        .icon-3 { width: 80px; height: 80px; top: 180px; left: 2%; font-size: 32px; color: #fff; animation-delay: 2.5s; }
+        .icon-4 { width: 70px; height: 70px; top: 200px; right: 5%; font-size: 28px; color: #fbbf24; animation-delay: 3.5s; }
+
+        .stack-item { display: flex; justify-content: space-between; align-items: center; padding: 25px 0; border-bottom: 1px solid var(--glass-border); transition: all 0.3s; }
+        .stack-name { font-size: 1.4rem; font-weight: 700; color: var(--text-primary); }
+        .stack-name i { color: var(--accent-cyan); margin-right: 15px; }
+        .stack-desc { font-size: 1rem; color: var(--text-secondary); margin-left: 38px; margin-top: 5px; }
+        .stack-value { font-size: 1.8rem; font-weight: 800; color: var(--accent-pink); background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(132, 204, 22, 0.3); padding: 8px 20px; border-radius: 12px; min-width: 150px; text-align: right; box-shadow: 0 0 25px rgba(132, 204, 22, 0.2); }
+
+        .total-value-row { margin-top: 50px; text-align: center; background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%); border: 1px solid var(--glass-border); color: white; padding: 40px; border-radius: 20px; }
+        .total-value-amount { font-size: 4rem; color: var(--danger-red); text-decoration: line-through; font-weight: 800; display: block; margin-top: 10px; opacity: 1; text-shadow: 0 0 20px rgba(255, 0, 0, 0.4); }
+        
+        .real-price { text-align: center; margin-top: 40px; font-size: 2.5rem; font-weight: 800; color: var(--text-primary); }
+        .real-price span.main-price { color: var(--accent-cyan) !important; font-size: 4rem; text-decoration: none !important; text-shadow: 0 0 40px rgba(16, 185, 129, 0.6); display: block; margin-top: 10px; letter-spacing: -0.025em; }
+
+        .scarcity-box { background: rgba(16, 185, 129, 0.1); border: 1px solid var(--accent-cyan); color: var(--accent-cyan); padding: 20px; text-align: center; font-weight: 600; margin: 30px auto; max-width: 800px; border-radius: 12px; display: flex; align-items: center; justify-content: center; gap: 15px; }
+
+        .footer { background: #000; color: var(--text-secondary); padding: 60px 0; text-align: center; font-size: 0.9rem; border-top: 1px solid var(--glass-border); position: relative; z-index: 10; }
+        .footer a { color: var(--text-primary); text-decoration: none; transition: color 0.3s; opacity: 0.7; }
+        .footer a:hover { opacity: 1; color: var(--accent-cyan); }
+
+        @media (max-width: 900px) {
+            .hero h1 { font-size: 2.8rem; }
+            .stack-item { flex-direction: column; text-align: center; align-items: center;}
+            .stack-value { margin-top: 15px; width: 100%; text-align: center; }
+            .stack-visual-wrapper { display: none; }
+            .stack-box { margin-top: 50px; padding-top: 40px; }
+            .real-price span.main-price { font-size: 2.5rem; }
+            .seo-feature-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ANIMATED BACKGROUND BLOBS -->
+    <div class="blob-container">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="container">
+            <div class="pre-headline">Exklusives Upgrade Angebot</div>
+            
+            <h1>Unternehmen zahlen <span class="red-highlight">Millionen</span> dafür was diese Unternehmer entwickelt haben</h1>
+            
+            <p class="hero-sub">Sie haben den ersten Schritt gemacht. Nutzen Sie jetzt den unfairen Vorteil, den sich sonst nur Großkonzerne leisten können.</p>
+
+            <div class="video-wrapper">
+                <div class="video-placeholder-text">
+                    <div class="play-btn">
+                        <i class="fas fa-play" style="font-size: 24px;"></i>
+                    </div>
+                    <div style="margin-top: 20px; font-weight: 600; color: white;">Ihre Chance auf Marktführerschaft<br><span style="font-size: 0.8rem; font-weight: 300;">(Bitte Sound einschalten)</span></div>
+                </div>
+            </div>
+
+            <!-- HERO CTA -->
+            <a href="https://netgains-pactum.pages.dev/" class="btn-cta">
+                UPGRADE JETZT HINZUFÜGEN
+                <span class="btn-subtext">Einmaliges Angebot • Nur auf dieser Seite verfügbar</span>
+            </a>
+            
+            <p class="hero-scarcity">
+                <i class="fas fa-hourglass-half"></i> ACHTUNG: Dieses Angebot verfällt, sobald Sie diese Seite verlassen.
+            </p>
+        </div>
+    </section>
+
+    <!-- LOGO SECTION -->
+    <section class="logo-section">
+        <div class="container">
+            <p class="text-center" style="color: var(--text-secondary); margin-bottom: 30px; font-size: 1rem; letter-spacing: 0.5px; font-weight: 400; max-width: 800px; margin-left: auto; margin-right: auto;">
+                Technologie-Stack vertraut von:
+            </p>
+            
+            <div class="logo-grid">
+                <!-- 1. Google -->
+                <div class="logo-item" style="--delay: 0s; --logo-url: url('images/google.svg');">
+                    <div class="logo-mask"></div>
+                </div>
+                <!-- 2. Unilever -->
+                <div class="logo-item" style="--delay: 0.2s; --logo-url: url('images/unilever.svg');">
+                    <div class="logo-mask"></div>
+                </div>
+                <!-- 3. Visa -->
+                <div class="logo-item" style="--delay: 0.4s; --logo-url: url('images/visa.svg');">
+                    <div class="logo-mask"></div>
+                </div>
+                <!-- 4. Porsche -->
+                <div class="logo-item" style="--delay: 0.6s; --logo-url: url('images/porsche.svg');">
+                    <div class="logo-mask"></div>
+                </div>
+                <!-- 5. OpenAI -->
+                <div class="logo-item" style="--delay: 0.8s; --logo-url: url('images/openai.svg');">
+                    <div class="logo-mask"></div>
+                </div>
+                <!-- 6. NordVPN -->
+                <div class="logo-item" style="--delay: 1.0s; --logo-url: url('images/nordvpn.svg');">
+                    <div class="logo-mask"></div>
+                </div>
+                <!-- 7. Cloudflare -->
+                <div class="logo-item" style="--delay: 1.2s; --logo-url: url('images/cloudflare.svg');">
+                    <div class="logo-mask"></div>
+                </div>
+                <!-- 8. NBC News -->
+                <div class="logo-item" style="--delay: 1.4s; --logo-url: url('images/nbcnews.svg');">
+                    <div class="logo-mask"></div>
+                </div>
+                <!-- 9. The Guardian -->
+                <div class="logo-item" style="--delay: 1.6s; --logo-url: url('images/theguardian.svg');">
+                    <div class="logo-mask"></div>
+                </div>
+                <!-- 10. Michelin -->
+                <div class="logo-item" style="--delay: 1.8s; --logo-url: url('images/michelin.svg');">
+                    <div class="logo-mask"></div>
+                </div>
+                <!-- 11. Proton -->
+                <div class="logo-item" style="--delay: 2.0s; --logo-url: url('images/proton.svg');">
+                    <div class="logo-mask"></div>
+                </div>
+                <!-- 12. Webflow -->
+                <div class="logo-item" style="--delay: 2.2s; --logo-url: url('images/webflow.svg');">
+                    <div class="logo-mask"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW: SEO REVOLUTION SECTION -->
+    <section class="seo-revolution">
+        <div class="container">
+            <h2 class="text-center" style="font-size: 3.5rem;">Die unsichtbare Macht: <br><span style="color: var(--accent-cyan);">Automatische Suchmaschinen-Dominanz</span></h2>
+            
+            <div class="chatgpt-box">
+                <h3 style="color: var(--danger-red); font-size: 2rem; margin-bottom: 15px;"><i class="fas fa-exclamation-triangle"></i> MACHEN SIE DEN TEST:</h3>
+                <p style="font-size: 1.5rem; line-height: 1.4; color: white;">
+                    Öffnen Sie jetzt ChatGPT und fragen Sie: <br>
+                    <i style="color: var(--text-secondary);">"Was kostet professionelle SEO-Betreuung für Unternehmen monatlich?"</i>
+                </p>
+                <div style="margin-top: 20px; font-weight: 700; color: var(--accent-cyan);">
+                    Die Antwort wird Sie schockieren: Agenturen verlangen zwischen 1.000 € und 5.000 € im MONAT.
+                </div>
+            </div>
+
+            <p class="text-center" style="max-width: 800px; margin: 0 auto; color: var(--text-secondary); font-size: 1.2rem;">
+                Warum ist das so teuer? Weil Menschen langsam sind. Ein SEO-Experte braucht Stunden, um Keywords zu analysieren. <br><br>
+                <b>Unsere "Smart-Fähigen" Websites machen das anders.</b> Sie sind nicht statisch. Sie leben.
+            </p>
+
+            <div class="seo-feature-grid">
+                <div class="seo-card">
+                    <h3 style="color: #64748b; font-size: 1.5rem;"><i class="fas fa-user-clock"></i> Der Mensch (Alt)</h3>
+                    <ul style="list-style: none; margin-top: 20px;">
+                        <li style="margin-bottom: 15px; color: var(--text-secondary);">❌ Analysiert 10 Keywords pro Stunde</li>
+                        <li style="margin-bottom: 15px; color: var(--text-secondary);">❌ Reagiert erst nach Wochen auf Trends</li>
+                        <li style="margin-bottom: 15px; color: var(--text-secondary);">❌ Kostet monatlich ein Vermögen</li>
+                    </ul>
+                </div>
+                
+                <div class="seo-card machine-card">
+                    <h3 style="color: var(--accent-cyan); font-size: 1.5rem;"><i class="fas fa-microchip"></i> Unsere Software (Neu)</h3>
+                    <ul style="list-style: none; margin-top: 20px;">
+                        <li style="margin-bottom: 15px;">✅ <b>Durchsucht 1000 Datenbanken</b> in Sekunden</li>
+                        <li style="margin-bottom: 15px;">✅ Aktualisiert Ihre Website <b>wöchentlich</b> mit den lukrativsten Keywords</li>
+                        <li style="margin-bottom: 15px;">✅ Kein Mensch kann mit dieser Geschwindigkeit mithalten</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <p class="text-center" style="margin-top: 40px; font-size: 1.2rem; color: var(--text-primary);">
+                Das Ergebnis? Während Ihre Konkurrenz schläft, passt sich Ihre Website jede Woche automatisch an das an, was Ihre Kunden bei Google suchen. <br>
+                <span style="color: var(--accent-pink); font-weight: 800;">Sie werden gefunden, ohne einen Finger zu rühren.</span>
+            </p>
+        </div>
+    </section>
+
+    <!-- STATUS SECTION -->
+    <section class="status-section">
+        <div class="container">
+            <h2 class="text-center" style="font-size: 4rem; margin-bottom: 20px;">Warum grün? <br><span class="text-highlight" style="background: linear-gradient(90deg, #10b981, #84cc16, #10b981); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Weil es die Farbe des Wachstums ist.</span></h2>
+            <div class="status-grid">
+                <div class="glass-panel status-item">
+                    <h3><i class="fas fa-chart-line" style="color: var(--accent-cyan)"></i> Exponentielles Wachstum</h3>
+                    <p>Skalieren Sie Ihr Geschäft mit Systemen, die automatisiert für Sie arbeiten, während Sie schlafen.</p>
+                </div>
+                <div class="glass-panel status-item">
+                    <h3><i class="fas fa-shield-alt" style="color: var(--accent-cyan)"></i> Militär-Grad Sicherheit</h3>
+                    <p>Schützen Sie Ihre Assets und Kundendaten mit der fortschrittlichsten Sicherheitstechnologie am Markt.</p>
+                </div>
+                <div class="glass-panel status-item">
+                    <h3><i class="fas fa-rocket" style="color: var(--accent-cyan)"></i> Speed-Optimierung</h3>
+                    <p>Ladezeiten unter 1 Sekunde sorgen für maximale Conversion-Raten und glückliche Google-Bots.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- VALUE STACK SECTION -->
+    <section class="stack-section" id="offer">
+        <div class="container">
+            <div class="stack-visual-wrapper">
+                <div class="floating-icon icon-1"><i class="fas fa-check-circle"></i></div>
+                <div class="floating-icon icon-2"><i class="fas fa-plus"></i></div>
+                <div class="floating-icon icon-3"><i class="fas fa-chart-bar"></i></div>
+                <div class="floating-icon icon-4"><i class="fas fa-search"></i></div>
+                
+                <div class="stack-laptop">
+                    <div class="laptop-mockup">
+                        <div class="laptop-screen">
+                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="[Analytics Dashboard]">
+                        </div>
+                    </div>
+                    <div class="laptop-base"></div>
+                </div>
+
+                <div class="stack-phone">
+                    <div class="phone-mockup">
+                        <div class="phone-screen">
+                            <img src="https://images.unsplash.com/photo-1555421689-491a97ff2040?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" alt="[Mobile SEO Stats]">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-panel stack-box">
+                <h2 class="text-center" style="font-size: 3.5rem; margin-bottom: 20px;">Ihr "Growth Accelerator" Upgrade</h2>
+                
+                <!-- PREVIOUS OFFER INCLUDED -->
+                <div class="stack-item" style="opacity: 0.8; border-bottom: 1px dashed rgba(255,255,255,0.1);">
+                    <div>
+                        <div class="stack-name"><i class="fas fa-check"></i> Standard "Smart-Website" Paket</div>
+                        <div class="stack-desc">Design, Sicherheit & Copywriting (Wert: 6.397 €)</div>
+                    </div>
+                    <div class="stack-value" style="background: none; border: 1px solid var(--text-secondary); color: var(--text-secondary); box-shadow: none;">INBEGRIFFEN</div>
+                </div>
+
+                <!-- NEW SEO ITEM -->
+                <div class="stack-item">
+                    <div>
+                        <div class="stack-name" style="color: var(--accent-cyan);"><i class="fas fa-robot"></i> Automatisierte AI-SEO Engine</div>
+                        <div class="stack-desc">Wöchentliche Keyword-Updates & 1000-Datenbanken-Scan. <br>Spart Agenturkosten von 1.000 € / Monat.</div>
+                    </div>
+                    <div class="stack-value">12.000 € / Jahr</div>
+                </div>
+
+                <div class="stack-item">
+                    <div>
+                        <div class="stack-name"><i class="fas fa-rocket"></i> Speed & Hosting Premium</div>
+                        <div class="stack-desc">Bevorzugte Server-Ressourcen für maximale Geschwindigkeit.</div>
+                    </div>
+                    <div class="stack-value">997 €</div>
+                </div>
+
+                <div class="total-value-row">
+                    <div class="total-value-label">GESAMTWERT PAKET:</div>
+                    <span class="total-value-amount">19.394 €</span>
+                </div>
+
+                <div class="real-price">
+                    Ihr neuer Gesamtpreis: <span class="main-price">2.399 € + 89 € / mtl.</span>
+                    <span style="display: block; font-size: 1rem; color: var(--text-secondary); margin-top: 10px; font-weight: 400;">(Statt 899 € + 39 € / mtl.)</span>
+                </div>
+
+                <div class="text-center">
+                    <a href="https://netgains-pactum.pages.dev/" class="btn-cta">
+                        JA, ICH WILL DAS UPGRADE
+                        <span class="btn-subtext">Zur Bestellung hinzufügen & SEO automatisieren</span>
+                    </a>
+                    <a href="#" style="display: block; margin-top: 20px; color: var(--text-secondary); text-decoration: underline; font-size: 0.9rem;">Nein danke, ich verzichte auf automatische Neukunden durch Google.</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 NetGains Webdesign. Alle Rechte vorbehalten.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
