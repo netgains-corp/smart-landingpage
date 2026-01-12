@@ -8,8 +8,27 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Lenis JS -->
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
     
     <style>
+        /* --- LENIS SMOOTH SCROLL CSS --- */
+        html.lenis, html.lenis body {
+            height: auto;
+        }
+        .lenis.lenis-smooth {
+            scroll-behavior: auto !important;
+        }
+        .lenis.lenis-smooth [data-lenis-prevent] {
+            overscroll-behavior: contain;
+        }
+        .lenis.lenis-stopped {
+            overflow: hidden;
+        }
+        .lenis.lenis-scrolling iframe {
+            pointer-events: none;
+        }
+
         /* --- NETGAINS GREEN OPS DESIGN SYSTEM --- */
         :root {
             --bg-dark: #020617;
@@ -437,7 +456,7 @@
         .total-value-amount { font-size: 4rem; color: var(--danger-red); text-decoration: line-through; font-weight: 800; display: block; margin-top: 10px; opacity: 1; text-shadow: 0 0 20px rgba(255, 0, 0, 0.4); }
         
         .real-price { text-align: center; margin-top: 40px; font-size: 2.5rem; font-weight: 800; color: var(--text-primary); }
-        .real-price span.main-price { color: var(--accent-cyan) !important; font-size: 4rem; text-decoration: none !important; text-shadow: 0 0 40px rgba(16, 185, 129, 0.6); display: block; margin-top: 10px; letter-spacing: -0.025em; }
+        .real-price span.main-price { color: var(--accent-cyan) !important; font-size: 5.5rem; text-decoration: none !important; text-shadow: 0 0 40px rgba(16, 185, 129, 0.6); display: block; margin-top: 10px; letter-spacing: -0.025em; }
 
         .scarcity-box { background: rgba(16, 185, 129, 0.1); border: 1px solid var(--accent-cyan); color: var(--accent-cyan); padding: 20px; text-align: center; font-weight: 600; margin: 30px auto; max-width: 800px; border-radius: 12px; display: flex; align-items: center; justify-content: center; gap: 15px; }
 
@@ -450,8 +469,9 @@
             .stack-item { flex-direction: column; text-align: center; align-items: center;}
             .stack-value { margin-top: 15px; width: 100%; text-align: center; }
             .stack-visual-wrapper { display: none; }
-            .stack-box { margin-top: 50px; padding-top: 40px; }
-            .real-price span.main-price { font-size: 2.5rem; }
+            .stack-box { margin-top: 50px; padding: 40px 20px; }
+            .stack-box h2 { font-size: 2.5rem; word-wrap: break-word; }
+            .real-price span.main-price { font-size: 3.5rem; }
             .seo-feature-grid { grid-template-columns: 1fr; }
         }
     </style>
@@ -492,7 +512,7 @@
             
             <h1>Unternehmen zahlen <span class="red-highlight">Millionen</span> dafür was diese <span class="red-underline">Unternehmer entwickelt haben</span></h1>
             
-            <p class="hero-sub">Sie haben den ersten Schritt gemacht. Nutzen Sie jetzt den unfairen Vorteil, den sich sonst nur Großkonzerne leisten können.</p>
+            <p class="hero-sub">Sparen sie sich die Werbung, mit unserer Smart-Website sind sie bei Google immer ganz oben mit dabei</p>
 
             <div class="video-wrapper">
                 <div class="video-placeholder-text">
@@ -526,8 +546,8 @@
             </p>
             
             <div class="logo-grid">
-                <!-- 1. Google -->
-                <div class="logo-item" style="--delay: 0s; --logo-url: url('images/google.svg');">
+                <!-- 1. Google (Neues "G" Logo gegen Abschneiden) -->
+                <div class="logo-item" style="--delay: 0s; --logo-url: url('https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg');">
                     <div class="logo-mask"></div>
                 </div>
                 <!-- 2. Unilever -->
@@ -713,7 +733,7 @@
                 </div>
 
                 <div class="real-price">
-                    Ihr neuer Gesamtpreis: <span class="main-price">2.399 € + 89 € / mtl.</span>
+                    Ihr neuer Gesamtpreis: <span class="main-price">3.399 € + 89 € / mtl.</span>
                     <span style="display: block; font-size: 1rem; color: var(--text-secondary); margin-top: 10px; font-weight: 400;">(Statt 899 € + 39 € / mtl.)</span>
                 </div>
 
@@ -724,6 +744,10 @@
                     </a>
                     <!-- ABLEHNUNGSLINK VALUE STACK (JETZT BUTTON) -->
                     <a href="https://buy.stripe.com/eVq28q2L80l03Rq7kOdnW01" class="btn-decline">Nein danke, ich möchte dieses Upgrade ablehnen und nur die Website für 899 € erwerben.</a>
+                    
+                    <p style="margin-top: 25px; color: var(--status-gold); font-size: 0.9rem; font-weight: 600;">
+                        <i class="fas fa-info-circle"></i> Info: Wir werden diesen Monat die Preise erhöhen, da wir unser Vertriebsteam erweitern.
+                    </p>
                 </div>
             </div>
         </div>
@@ -768,6 +792,36 @@
             <p>&copy; 2026 NetGains Webdesign. Alle Rechte vorbehalten.</p>
         </div>
     </footer>
+
+    <script>
+        // Init Lenis
+        const lenis = new Lenis()
+
+        lenis.on('scroll', (e) => {
+            // console.log(e)
+        })
+
+        function raf(time) {
+            lenis.raf(time)
+            requestAnimationFrame(raf)
+        }
+
+        requestAnimationFrame(raf)
+
+        // Smooth Scroll für Links mit Lenis
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const target = document.querySelector(targetId);
+                if (target) {
+                    e.preventDefault();
+                    lenis.scrollTo(target);
+                }
+            });
+        });
+    </script>
 
 </body>
 </html>
